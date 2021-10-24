@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+.content{
+    display: none;
+}
+
+.card{
+    /* border: 1px solid blue; */
+    border-radius: 6px; 
+    overflow: hidden;
+    padding: 10px;
+    margin: 1.5rem;
+    box-shadow: 0 13px 27px -5px hsl(240deg 30% 28% / 25%), 0 8px 16px -8px hsl(0deg 0% 0% / 30%), 0 -6px 16px -6px hsl(0deg 0% 0% / 3%);
+}
+
+.image{
+    max-width: 25%;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.image img{
+    max-width:100%;
+    min-height: 100%;
+    object-fit: cover;
+    
+}
+
+.body{
+    display: flex;
+    justify-content: space-between;
+}
+
+.body_content{
+    /* border: 1px solid black; */
+    padding: 15px;
+    width: 70%;
+    float: right;
+}
+.title{
+    margin-top: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.author{
+    color: grey;
+    display: inline;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 968px){
+    .body{
+        flex-flow: wrap;
+    }
+
+    .image{
+        max-width: 100%;
+    }
+
+    .card{
+        margin: 1.5rem 0.5rem;
+    }
+
+}
