@@ -1,33 +1,32 @@
 import classes from './App.module.css';
-import {useRef} from 'react'
+import {useState} from 'react'
 import FetchCore from './components/FetchCore';
+import FetchSources from './components/FetchSources';
+
 
 
 function App() {
+  
+  
+  const [parsedData, setParsedData] = useState({})
 
-  const enteredQuery = useRef();
-
-  function queryHandler(event){
-    event.preventDefault();
-    const searchQuery = enteredQuery.current.value;
-
-    const queryBucket = {
-      search: searchQuery,
-    }
-
-    
+  function sendToParent (data){
+    setParsedData(data)
   }
+  
+
 
   return (
     <div className={classes.App}>
       <header className={classes.Appheader}>
         <h1>NewsFeedr.</h1>
-
-          <form className={classes.control} onSubmit={queryHandler} >
-            <input type="text" id="search_field" ref={enteredQuery}/>
-            <input type="submit"/>
-          </form>
-            <FetchCore />
+            <FetchSources sendToParent = {sendToParent}/>
+            <FetchCore 
+              query={parsedData.query || ""}
+              country ={parsedData.country}
+              category={parsedData.category}
+              language={parsedData.language}
+            />
       </header>
     </div>
   );

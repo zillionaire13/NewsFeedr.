@@ -4,9 +4,19 @@ import NewsCard from './NewsCard';
 
 export default function FetchCore(props) {
 
-    const url = `https://newsapi.org/v2/everything?q=${props.query}&apiKey=0cf9a5d664af4b3898ac8d07d4870737`
     const [isLoading, setisLoading] = useState(true)
     const [dataLoaded, setdataLoaded] = useState([])
+    const [region, setregion] = useState()
+    
+    useEffect(()=>{
+        fetch("http://ip-api.com/json")
+        .then((res) => res.json())
+        .then(data => {
+            setregion(data.countryCode.toLowerCase())
+        })
+    }, [])
+
+    const url = `https://newsapi.org/v2/top-headlines?q=${props.query}&country=${props.country||region}&category=${props.category || 'general'}&apiKey=d8a2725a8955420cbde72c01245fd36c`
 
     useEffect(() => {
         setisLoading(true)
@@ -17,14 +27,11 @@ export default function FetchCore(props) {
                 }
             })
             .then((data) => {
-                data.articles.map((article) => {
-                    dataLoaded.push(article)
-                    return console.log('OK')
-                })
+                setdataLoaded(data.articles)
                 setisLoading(false)
-                setdataLoaded(dataLoaded)
+                console.log(url)
             })
-    }, [props.query])
+    }, [url])
 
 
     if (isLoading) {
@@ -36,23 +43,26 @@ export default function FetchCore(props) {
             </div>
         )
     }
-    
-    return(
+
+    return (
         <ul className={classes.nCard}>
-            {dataLoaded.map((article)=>{
-              return <li>
-                <NewsCard 
-                  title ={article.title}
-                  urlToImage={article.urlToImage}
-                  author={article.author}
-                  publishedAt={article.publishedAt}
-                  description={article.description}
-                  url={article.url}
-                  source = {article.source.name}
-                  content = {article.content}
-                />
-              </li>
+            {dataLoaded.map((article) => {
+                return (
+                    <div>
+                        <li>
+                            <NewsCard
+                                title={article.title}
+                                urlToImage={article.urlToImage}
+                                author={article.author}
+                                publishedAt={article.publishedAt}
+                                description={article.description}
+                                url={article.url}
+                                source={article.source.name}
+                                content={article.content}
+                            />
+                        </li>
+                    </div>)
             })}
-          </ul>
+        </ul>
     )
 }
