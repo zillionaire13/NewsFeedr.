@@ -7,16 +7,18 @@ export default function FetchCore(props) {
     const [isLoading, setisLoading] = useState(true)
     const [dataLoaded, setdataLoaded] = useState([])
     const [region, setregion] = useState()
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         fetch("http://ip-api.com/json")
-        .then((res) => res.json())
-        .then(data => {
-            setregion(data.countryCode.toLowerCase())
-        })
+            .then((res) => res.json())
+            .then(data => {
+                setregion(data.countryCode.toLowerCase())
+            })
     }, [])
 
-    const url = `https://newsapi.org/v2/top-headlines?q=${props.query}&country=${props.country||region}&category=${props.category || 'general'}&apiKey=d8a2725a8955420cbde72c01245fd36c`
+    const url = `https://newsapi.org/v2/top-headlines?q=${props.query}&country=${props.country || region}&category=${props.category || 'general'}&apiKey=d8a2725a8955420cbde72c01245fd36c`
+
+    console.log(url)
 
     useEffect(() => {
         setisLoading(true)
@@ -36,10 +38,13 @@ export default function FetchCore(props) {
 
     if (isLoading) {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <h1>Loading...</h1>
-                </header>
+            <div className=" flex flex-col gap-5 justify-center items-center w-full">
+                <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                <div className="">
+                    <h1>
+                        Loading...
+                    </h1>
+                </div>
             </div>
         )
     }
