@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
-.content{
+/* .content{
     display: none;
 }
 
 .card{
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
     border-radius: 6px; 
     overflow: hidden;
     padding: 10px;
@@ -32,7 +32,7 @@
 }
 
 .body_content{
-    /* border: 1px solid black; */
+    border: 1px solid black;
     padding: 15px;
     width: 70%;
     float: right;
@@ -45,7 +45,7 @@
 .author{
     color: grey;
     display: inline;
-}
+} */
 
 
 
@@ -53,7 +53,7 @@
 
 
 
-
+/* 
 @media (max-width: 968px){
     .body{
         flex-flow: wrap;
@@ -67,4 +67,4 @@
         margin: 1.5rem 0.5rem;
     }
 
-}
+} */
